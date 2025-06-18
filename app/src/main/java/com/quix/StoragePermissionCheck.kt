@@ -1,4 +1,4 @@
-/* package com.quix
+package com.quix
 
 import android.Manifest
 import android.app.Activity
@@ -42,5 +42,4 @@ fun StoragePermissionCheck(
     
     }
 }
-*/
 
