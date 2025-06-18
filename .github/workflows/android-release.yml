@@ -38,19 +38,24 @@ jobs:
         ORG_GRADLE_PROJECT_keyAlias: ${{ secrets.SIGNING_KEY_ALIAS }}
         ORG_GRADLE_PROJECT_keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
 
+        - name: Capture build logs
+      if: failure()
+      run: |
+        mkdir -p artifacts/logs
+        cp -r app/build/reports artifacts/logs || true
+        cp -r app/build/outputs/mapping/release artifacts/logs || true
+
+    - name: Upload logs on failure
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: r8-fail-logs
+        path: artifacts/logs
+
+    
     - name: Upload Release APK
       uses: actions/upload-artifact@v4
       with:
         name: app-release-apk
         path: app/build/outputs/apk/release/*.apk
         retention-days: 7 # Keep artifact for 7 days
-
-    
-    - name: Upload R8/ProGuard logs
-      if: failure()
-      uses: actions/upload-artifact@v4
-      with:
-        name: r8-logs
-        path: |
-          app/build/outputs/mapping/release/
-          app/build/reports/
