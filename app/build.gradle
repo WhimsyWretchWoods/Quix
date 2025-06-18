@@ -4,6 +4,8 @@ plugins {
 }
 
 android {
+
+	
     compileSdk 35
 	namespace "com.quix"
 		
@@ -36,6 +38,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }	
+	composeOptions {
+        kotlinCompilerExtensionVersion '1.7.0'
+    }
     kotlinOptions {
         jvmTarget = '17'
     }
