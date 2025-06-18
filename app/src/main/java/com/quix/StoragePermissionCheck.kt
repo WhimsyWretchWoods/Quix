@@ -30,15 +30,19 @@ fun StoragePermissionCheck(
         hasPermission = isGranted
     }
 
+    /*
     LaunchedEffect(Unit) {
         if (!hasPermission) {
             launcher.launch(permission)
         }
     }
+    */
 
+    /*
     if (hasPermission) {
         onGranted()
     } else {
-    
+
     }
+    */
 }
