@@ -45,7 +45,7 @@ android {
 }
 
 dependencies {
-    // Import the Compose BOM. THIS IS THE LATEST STABLE AS OF TODAY.
+    // Import the Compose BOM. THIS IS THE LATEST STABLE AS OF TODAY
     val composeBom = platform("androidx.compose:compose-bom:2025.06.00")
     implementation(composeBom)
     androidTestImplementation(composeBom)
