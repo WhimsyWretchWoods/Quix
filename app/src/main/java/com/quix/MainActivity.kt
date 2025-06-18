@@ -33,9 +33,8 @@ class MainActivity : ComponentActivity() {
               .fillMaxSize()
               .padding(innerPadding)
           ) {
-            StoragePermissionCheck {
               Navigation(navController = navController)
-            }
+            
           }
         }
       }
