@@ -16,9 +16,17 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
-
+    signingConfigs {
+    release {
+        storeFile = file(project.property("storeFile"))
+        storePassword = project.property("storePassword")
+        keyAlias = project.property("keyAlias")
+        keyPassword = project.property("keyPassword")
+    }
+}
     buildTypes {
         release {
+            signingConfig = signingConfigs.release
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
