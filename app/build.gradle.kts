@@ -17,20 +17,25 @@ android {
         versionName = "1.0"
     }
     signingConfigs {
-    release {
-        storeFile = file(project.property("storeFile"))
-        storePassword = project.property("storePassword")
-        keyAlias = project.property("keyAlias")
-        keyPassword = project.property("keyPassword")
+    create("release") {
+        storeFile = file(project.property("storeFile") as String)
+        storePassword = project.property("storePassword") as String
+        keyAlias = project.property("keyAlias") as String
+        keyPassword = project.property("keyPassword") as String
     }
 }
-    buildTypes {
-        release {
-            signingConfig = signingConfigs.release
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
+
+buildTypes {
+    getByName("release") {
+        signingConfig = signingConfigs.getByName("release")
+        isMinifyEnabled = false
+        proguardFiles(
+            getDefaultProguardFile("proguard-android-optimize.txt"),
+            "proguard-rules.pro"
+        )
     }
+}
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
