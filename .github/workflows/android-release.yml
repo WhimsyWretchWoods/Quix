@@ -44,3 +44,13 @@ jobs:
         name: app-release-apk
         path: app/build/outputs/apk/release/*.apk
         retention-days: 7 # Keep artifact for 7 days
+
+    
+    - name: Upload R8/ProGuard logs
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: r8-logs
+        path: |
+          app/build/outputs/mapping/release/
+          app/build/reports/
