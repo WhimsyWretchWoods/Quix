@@ -32,13 +32,12 @@ jobs:
     - name: Build Signed Release APK
       run: ./gradlew assembleRelease --stacktrace
       env:
-        # These variables are automatically picked up by Gradle (ORG_GRADLE_PROJECT_)
         ORG_GRADLE_PROJECT_storeFile: ${{ github.workspace }}/app/release-key.jks
         ORG_GRADLE_PROJECT_storePassword: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
         ORG_GRADLE_PROJECT_keyAlias: ${{ secrets.SIGNING_KEY_ALIAS }}
         ORG_GRADLE_PROJECT_keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
 
-        - name: Capture build logs
+    - name: Capture build logs
       if: failure()
       run: |
         mkdir -p artifacts/logs
@@ -52,10 +51,10 @@ jobs:
         name: r8-fail-logs
         path: artifacts/logs
 
-    
     - name: Upload Release APK
+      if: success()
       uses: actions/upload-artifact@v4
       with:
         name: app-release-apk
         path: app/build/outputs/apk/release/*.apk
-        retention-days: 7 # Keep artifact for 7 days
+        retention-days: 7
